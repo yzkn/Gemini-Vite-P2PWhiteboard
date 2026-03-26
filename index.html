@@ -38,8 +38,12 @@
 
       <div class="navbar-right">
         <div class="room-info">
+          <!-- 接続状態を示すドットとテキストを追加 -->
+          <div id="connection-status-dot" class="status-dot"></div>
+          <span id="connection-status" class="status-text">Disconnected</span>
+          <div class="divider"></div>
           <span id="my-id-display">ID: ----</span>
-          <button id="copy-link-btn" title="Copy Link"><i data-lucide="copy"></i></button>
+          <button id="copy-id-btn" title="Copy ID"><i data-lucide="copy"></i></button>
         </div>
         <button id="join-btn" class="secondary-btn">Join</button>
       </div>
@@ -56,24 +60,24 @@
         <input type="text" id="peer-id-input" placeholder="Enter Room ID">
         <div class="modal-actions">
           <button id="connect-btn" class="primary-btn">Connect</button>
-          <button id="join-close-btn">Cancel</button>
+          <button id="join-close-btn" class="secondary-btn">Cancel</button>
         </div>
       </div>
     </div>
 
-    <!-- 付箋編集用モーダル (既存) -->
+    <!-- 付箋編集モーダル -->
     <div id="sticky-modal" class="modal-overlay hidden">
       <div class="modal-content">
         <h3>Edit Sticky</h3>
         <textarea id="sticky-text-edit"></textarea>
         <div class="color-settings">
-          <label>BG: <input type="color" id="sticky-bg-color"></label>
+          <label>Background: <input type="color" id="sticky-bg-color"></label>
           <label>Text: <input type="color" id="sticky-text-color"></label>
         </div>
         <div class="modal-actions">
-          <button id="sticky-save" class="primary-btn">Save</button>
+          <button id="sticky-save" class="primary-btn">Save Changes</button>
           <button id="sticky-delete" class="danger-btn">Delete</button>
-          <button id="sticky-close">Close</button>
+          <button id="sticky-close" class="secondary-btn">Close</button>
         </div>
       </div>
     </div>

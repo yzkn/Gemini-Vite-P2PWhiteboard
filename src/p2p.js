@@ -38,12 +38,29 @@ export function initP2P(myId, onOpen) {
     });
 }
 
+function updateStatusUI(isConnected) {
+    const statusText = document.getElementById('connection-status');
+    const statusDot = document.getElementById('connection-status-dot');
+
+    if (statusText) {
+        statusText.innerText = isConnected ? 'Connected' : 'Disconnected';
+    }
+    if (statusDot) {
+        if (isConnected) {
+            statusDot.classList.add('connected');
+        } else {
+            statusDot.classList.remove('connected');
+        }
+    }
+}
+
 function setupConnection(conn) {
     conn.on('open', () => {
         if (!connections.find(c => c.peer === conn.peer)) {
             connections.push(conn);
         }
-        document.getElementById('connection-status').innerText = 'Connected';
+        // 安全なUI更新関数を呼び出す
+        updateStatusUI(true);
 
         // 現在の状態を新規接続者に送信
         conn.send({ type: 'SYNC_ALL', elements: $elements.get(), settings: $boardSettings.get() });
@@ -63,7 +80,8 @@ function setupConnection(conn) {
     conn.on('close', () => {
         connections = connections.filter(c => c !== conn);
         if (connections.length === 0) {
-            document.getElementById('connection-status').innerText = 'Disconnected';
+            // 安全なUI更新関数を呼び出す
+            updateStatusUI(false);
         }
     });
 }
