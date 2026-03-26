@@ -86,10 +86,13 @@ export function setupWhiteboard() {
             addElement(currentPath);
         } else if (currentTool === 'sticky') {
             const id = generateElementId();
+
+            const selectedColor = colorPicker.value;
+
             addElement({
                 id, type: 'sticky', x: x - 90, y: y - 60,
                 width: 180, height: 120, // デフォルトサイズを追加
-                text: 'New Note', bgColor: '#ffff88', textColor: '#000000'
+                text: 'New Note', bgColor: selectedColor, textColor: '#000000'
             });
             broadcastSync();
         }
@@ -159,6 +162,7 @@ function render(elements) {
             div.style.height = `${el.height || 120}px`;
             div.style.backgroundColor = el.bgColor;
             div.style.color = el.textColor;
+            div.style.fontSize = `${el.fontSize || 16}px`;
 
             // 移動用ドラッグ
             div.onmousedown = (e) => {

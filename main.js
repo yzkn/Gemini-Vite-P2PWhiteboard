@@ -17,6 +17,8 @@ window.openStickyModal = (el) => {
     document.getElementById('sticky-text-edit').value = el.text;
     document.getElementById('sticky-bg-color').value = el.bgColor;
     document.getElementById('sticky-text-color').value = el.textColor;
+    // 現在のフォントサイズをセット（未設定ならデフォルト16）
+    document.getElementById('sticky-font-size').value = el.fontSize || 16;
     stickyModal.classList.remove('hidden');
 };
 
@@ -27,7 +29,9 @@ document.getElementById('sticky-save').onclick = () => {
     updateElement(currentEditingId, {
         text: document.getElementById('sticky-text-edit').value,
         bgColor: document.getElementById('sticky-bg-color').value,
-        textColor: document.getElementById('sticky-text-color').value
+        textColor: document.getElementById('sticky-text-color').value,
+        // 数値として取得して保存
+        fontSize: parseInt(document.getElementById('sticky-font-size').value, 10) || 16
     });
 
     // 変更を全員に同期
