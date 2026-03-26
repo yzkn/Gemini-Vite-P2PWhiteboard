@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>P2P Whiteboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="app">
+    <header>
+      <div class="connection-panel">
+        <span id="my-id-display">Your ID: ---</span>
+        <input type="text" id="peer-id-input" placeholder="Peer ID to join">
+        <button id="connect-btn">Connect</button>
+      </div>
+      <div class="toolbar">
+        <div class="tool-group">
+          <button id="tool-pencil" class="active">Pencil</button>
+          <button id="tool-sticky">Sticky</button>
+          <input type="color" id="color-picker" value="#000000">
+        </div>
+        <div class="tool-group">
+          <button id="bg-grid">Grid</button>
+          <button id="bg-plain">Plain</button>
+        </div>
+        <div class="status" id="connection-status">Disconnected</div>
+      </div>
+    </header>
+
+    <main id="board-container">
+      <div id="whiteboard" class="grid-bg">
+        <!-- Elements will be rendered here -->
+      </div>
+    </main>
+
+    <!-- 付箋編集用モーダル -->
+    <div id="sticky-modal" class="hidden">
+      <div class="modal-content">
+        <textarea id="sticky-text-edit"></textarea>
+        <div class="modal-actions">
+          <label>BG: <input type="color" id="sticky-bg-color"></label>
+          <label>Text: <input type="color" id="sticky-text-color"></label>
+          <button id="sticky-save">Save</button>
+          <button id="sticky-delete" class="danger">Delete</button>
+          <button id="sticky-close">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/main.js"></script>
+</body>
+
+</html>
