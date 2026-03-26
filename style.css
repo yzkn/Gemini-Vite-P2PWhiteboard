@@ -1,0 +1,215 @@
+/* Copyright (c) 2026 YA-androidapp(https://github.com/yzkn) All rights reserved. */
+
+
+:root {
+    --primary: #3b82f6;
+    --primary-hover: #2563eb;
+    --bg-app: #f1f5f9;
+    --bg-card: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--bg-app);
+    color: var(--text-main);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Navbar Layout */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000;
+    pointer-events: none;
+    /* 下のボードを操作可能に */
+}
+
+.navbar-left,
+.navbar-center,
+.navbar-right {
+    pointer-events: auto;
+    /* 子要素はクリック可能に */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    background: var(--bg-card);
+    padding: 8px 16px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin: 0;
+}
+
+/* Floating Toolbar */
+.floating-toolbar {
+    background: var(--bg-card);
+    padding: 6px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.floating-toolbar button {
+    background: transparent;
+    border: none;
+    padding: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: var(--text-muted);
+    transition: all 0.2s;
+}
+
+.floating-toolbar button:hover {
+    background: var(--bg-app);
+    color: var(--text-main);
+}
+
+.floating-toolbar button.active {
+    background: #eff6ff;
+    color: var(--primary);
+}
+
+.divider {
+    width: 1px;
+    height: 24px;
+    background: var(--border-color);
+    margin: 0 4px;
+}
+
+#color-picker {
+    border: none;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+/* Room Info & Buttons */
+.room-info {
+    background: var(--bg-card);
+    padding: 6px 12px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.secondary-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 8px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    font-weight: 600;
+}
+
+.primary-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.danger-btn {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Modal Styling */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background: white;
+    padding: 24px;
+    border-radius: 20px;
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+    width: 90%;
+    max-width: 400px;
+}
+
+/* Whiteboard container adjustments */
+#board-container {
+    width: 100vw;
+    height: 100vh;
+    padding-top: 0;
+    /* Navbarが浮いているので不要 */
+}
+
+/* Lucide Icon Adjustments */
+.lucide {
+    width: 20px;
+    height: 20px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .logo {
+        display: none;
+    }
+
+    .navbar {
+        padding: 10px;
+        height: auto;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .navbar-center {
+        order: 2;
+    }
+
+    .navbar-right {
+        order: 1;
+        width: 100%;
+        justify-content: space-between;
+    }
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>P2P Whiteboard</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- アイコンライブラリ Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+  <div id="app">
+    <header class="navbar">
+      <div class="navbar-left">
+        <h1 class="logo">P2P Board</h1>
+      </div>
+
+      <div class="navbar-center">
+        <div class="floating-toolbar">
+          <button id="tool-pencil" title="Pencil" class="active">
+            <i data-lucide="pencil"></i>
+          </button>
+          <button id="tool-sticky" title="Sticky Note">
+            <i data-lucide="sticky-note"></i>
+          </button>
+          <input type="color" id="color-picker" value="#3b82f6" title="Color">
+          <div class="divider"></div>
+          <button id="bg-grid" title="Grid View">
+            <i data-lucide="grid-3x3"></i>
+          </button>
+          <button id="bg-plain" title="Plain View">
+            <i data-lucide="square"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="navbar-right">
+        <div class="room-info">
+          <span id="my-id-display">ID: ----</span>
+          <button id="copy-link-btn" title="Copy Link"><i data-lucide="copy"></i></button>
+        </div>
+        <button id="join-btn" class="secondary-btn">Join</button>
+      </div>
+    </header>
+
+    <main id="board-container">
+      <div id="whiteboard" class="grid-bg"></div>
+    </main>
+
+    <!-- 参加用モーダル -->
+    <div id="join-modal" class="modal-overlay hidden">
+      <div class="modal-content">
+        <h3>Join Board</h3>
+        <input type="text" id="peer-id-input" placeholder="Enter Room ID">
+        <div class="modal-actions">
+          <button id="connect-btn" class="primary-btn">Connect</button>
+          <button id="join-close-btn">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 付箋編集用モーダル (既存) -->
+    <div id="sticky-modal" class="modal-overlay hidden">
+      <div class="modal-content">
+        <h3>Edit Sticky</h3>
+        <textarea id="sticky-text-edit"></textarea>
+        <div class="color-settings">
+          <label>BG: <input type="color" id="sticky-bg-color"></label>
+          <label>Text: <input type="color" id="sticky-text-color"></label>
+        </div>
+        <div class="modal-actions">
+          <button id="sticky-save" class="primary-btn">Save</button>
+          <button id="sticky-delete" class="danger-btn">Delete</button>
+          <button id="sticky-close">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/main.js"></script>
+</body>
+
+</html><!-- Copyright (c) 2026 YA-androidapp(https://github.com/yzkn) All rights reserved. -->
