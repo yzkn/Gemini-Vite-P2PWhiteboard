@@ -1,0 +1,81 @@
+以下のWebアプリケーションを構築しようと思います。
+ソースコードを生成してください。
+
+[アプリケーションの概要]
+
+    タイトル: P2Pホワイトボードアプリ
+
+    機能:
+
+        手書き入力・入力した内容の共有
+
+            手書き入力された図形の移動・削除
+
+            手書き入力の文字色の設定変更
+
+        付箋貼り付け・貼り付けた付箋の共有
+
+            貼り付けられた付箋の移動・削除
+
+            付箋に設定された文字列の修正
+
+            付箋の地の色の設定変更
+
+            付箋の文字色の設定変更
+
+        ホワイトボード自体への描画内容の変更
+
+            方眼紙のようなマス目を表示
+
+            真っ白な描画への変更
+
+[使用技術]
+
+    JavaScriptフレームワーク: Vite（Reactは使用しない）
+
+    フロントエンド: HTML, CSS, JavaScript
+
+    P2Pライブラリ: Peer.js
+
+    状態管理: Nano Stores
+
+[ロジック]
+
+P2P接続のロジックやタイミングは次のリポジトリと同一としてください。
+
+    https://github.com/yzkn/CloudflarePages-Vite-P2PEditor
+
+Peerを識別するID生成には、以下の関数を利用する
+
+    // 指定された文字セットでIDを生成する関数
+    const ALPHABET = '123456789abcdefghijkmnopqrstuvwxyz';
+    function generateShortId(): string {
+        let result = '';
+        for (let i = 0; i < 4; i++) {
+            result += ALPHABET.charAt(Math.floor(Math.random() * ALPHABET.length));
+        }
+        return result;
+    }
+
+[デプロイ方法]
+
+    Cloudflare Pagesを利用してデプロイする
+
+    Viteを利用する場合は、ビルドして静的サイトとしてデプロイする
+
+    Deploy.mdにデプロイ手順を記載する
+
+    Build.mdにプロジェクトをつくり始める際に実行するコマンドと手順を記載する
+
+[その他要件]
+
+    レスポンシブデザイン対応
+
+    ユーザーフレンドリーなUI
+
+[エラーハンドリングの想定]
+
+    P2P接続に失敗した場合のエラー通知・リトライ処理
+
+    特に、Firefoxで実行した際に「WebRTC: ICE failed, your TURN server appears to be broken, see about:webrtc for more details」が出力されないことを確認してください
+
