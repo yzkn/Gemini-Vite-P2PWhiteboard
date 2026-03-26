@@ -12,7 +12,7 @@ import {
     createIcons,
     Pencil,
     StickyNote,
-    Grid3X3,
+    Grid3x3,
     Square,
     Copy
 } from 'lucide';
@@ -23,7 +23,7 @@ const refreshIcons = () => {
         icons: {
             Pencil,
             StickyNote,
-            Grid3X3,
+            Grid3x3,
             Square,
             Copy
         }
