@@ -279,6 +279,29 @@ button:hover {
     /* スマホでの誤動作防止 */
     z-index: 100;
     /* 線より上に表示 */
+
+    box-sizing: border-box;
+    /* パディングを含めたサイズ管理 */
+    overflow: visible;
+    /* ハンドルを外に出せるように */
+}
+
+.resize-handle {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 15px;
+    height: 15px;
+    cursor: nwse-resize;
+    background: rgba(0, 0, 0, 0.1);
+    /* 右下を三角形にするデザイン */
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    border-radius: 0 0 4px 0;
+    transition: background 0.2s;
+}
+
+.resize-handle:hover {
+    background: rgba(0, 0, 0, 0.3);
 }
 
 /* Lucide Icon Adjustments */

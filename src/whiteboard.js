@@ -9,6 +9,47 @@ let currentTool = 'pencil';
 let isDrawing = false;
 let currentPath = null;
 
+function setupResize(el, e, domElement) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    let startX = e.clientX;
+    let startY = e.clientY;
+    let startWidth = domElement.offsetWidth;
+    let startHeight = domElement.offsetHeight;
+
+    const onMove = (moveEvent) => {
+        const dw = moveEvent.clientX - startX;
+        const dh = moveEvent.clientY - startY;
+
+        // 最小サイズ制限 (100x80)
+        const newWidth = Math.max(100, startWidth + dw);
+        const newHeight = Math.max(80, startHeight + dh);
+
+        // DOMを直接操作してリアルタイムに反映
+        domElement.style.width = `${newWidth}px`;
+        domElement.style.height = `${newHeight}px`;
+    };
+
+    const onUp = (upEvent) => {
+        window.removeEventListener('mousemove', onMove);
+        window.removeEventListener('mouseup', onUp);
+
+        const dw = upEvent.clientX - startX;
+        const dh = upEvent.clientY - startY;
+
+        // ストアを更新してP2P共有
+        updateElement(el.id, {
+            width: Math.max(100, startWidth + dw),
+            height: Math.max(80, startHeight + dh)
+        });
+        broadcastSync();
+    };
+
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+}
+
 export function setupWhiteboard() {
     const board = document.getElementById('whiteboard');
     const colorPicker = document.getElementById('color-picker');
@@ -47,6 +88,7 @@ export function setupWhiteboard() {
             const id = generateElementId();
             addElement({
                 id, type: 'sticky', x: x - 90, y: y - 60,
+                width: 180, height: 120, // デフォルトサイズを追加
                 text: 'New Note', bgColor: '#ffff88', textColor: '#000000'
             });
             broadcastSync();
@@ -112,24 +154,31 @@ function render(elements) {
             div.innerText = el.text;
             div.style.left = `${el.x}px`;
             div.style.top = `${el.y}px`;
+            // サイズをストアから反映
+            div.style.width = `${el.width || 180}px`;
+            div.style.height = `${el.height || 120}px`;
             div.style.backgroundColor = el.bgColor;
             div.style.color = el.textColor;
 
-            // ドラッグ開始
+            // 移動用ドラッグ
             div.onmousedown = (e) => {
-                // 右クリックなどは無視
                 if (e.button !== 0) return;
                 e.stopPropagation();
                 setupDrag(el, e, div);
             };
 
-            // ダブルクリック（setupDragで再描画がブロックされるため、これが発火するようになる）
+            // --- 追加: リサイズハンドルの作成 ---
+            const handle = document.createElement('div');
+            handle.className = 'resize-handle';
+            handle.onmousedown = (e) => {
+                setupResize(el, e, div);
+            };
+            div.appendChild(handle);
+
             div.ondblclick = (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                if (window.openStickyModal) {
-                    window.openStickyModal(el);
-                }
+                if (window.openStickyModal) window.openStickyModal(el);
             };
 
             board.appendChild(div);
