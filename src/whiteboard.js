@@ -154,6 +154,7 @@ function render(elements) {
         else if (el.type === 'sticky') {
             const div = document.createElement('div');
             div.className = 'sticky-note';
+            div.setAttribute('tabindex', '0'); // キーボードで選択可能にする
             div.innerText = el.text;
             div.style.left = `${el.x}px`;
             div.style.top = `${el.y}px`;
@@ -183,6 +184,14 @@ function render(elements) {
                 e.preventDefault();
                 e.stopPropagation();
                 if (window.openStickyModal) window.openStickyModal(el);
+            };
+
+            // キーボード操作対応: Enterキーでモーダルを開く
+            div.onkeydown = (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    window.openStickyModal(el);
+                }
             };
 
             board.appendChild(div);

@@ -388,3 +388,22 @@ button:hover {
     border: 1px solid var(--border-color);
     border-radius: 4px;
 }
+
+/* フォーカス時の輪郭を強調（ブラウザ標準より見やすく） */
+:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* 付箋がフォーカスされた時のスタイル */
+.sticky-note:focus {
+    outline: 3px solid var(--primary);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+/* モーダル内の入力項目 */
+.modal-content input:focus,
+.modal-content textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}

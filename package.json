@@ -12,6 +12,7 @@
     "vite": "^8.0.1"
   },
   "dependencies": {
+    "lucide": "^1.7.0",
     "nanostores": "^1.2.0",
     "peerjs": "^1.5.5"
   }
